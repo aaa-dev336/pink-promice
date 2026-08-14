@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pink Promise</title>
+    <meta name="description" content="One tiny question, wrapped in pink." />
+    <style>
+      :root { --pink:#e7438c; --deep:#71244e; --light:#fff1f8; }
+      * { box-sizing:border-box; }
+      [hidden] { display:none !important; }
+      body { margin:0; min-height:100vh; overflow:hidden; color:var(--deep); font-family:"Trebuchet MS","Arial Rounded MT Bold",Arial,sans-serif; background:radial-gradient(circle at 50% -8%,#fff 0,transparent 42%),linear-gradient(145deg,#fff1f8,#ffd4e8 49%,#ffc7e1); }
+      main { position:relative; min-height:100svh; display:grid; place-items:center; padding:28px 14px 62px; isolation:isolate; }
+      main:before { content:""; position:fixed; inset:0; z-index:-2; opacity:.24; background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px); background-size:28px 28px; mask-image:linear-gradient(#000,transparent 85%); }
+      .hearts { position:fixed; inset:0; z-index:-1; pointer-events:none; }
+      .hearts span { position:absolute; bottom:-40px; color:rgba(222,64,137,.42); font-size:25px; font-weight:bold; animation:float var(--d) linear infinite; animation-delay:var(--delay); }
+      .card { position:relative; width:min(100%,520px); min-height:570px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:55px 26px 42px; border:2px solid rgba(255,255,255,.86); border-radius:40px; background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,246,251,.74)); box-shadow:0 30px 70px rgba(154,35,91,.22),0 8px 0 rgba(224,84,148,.12),inset 0 0 0 8px rgba(255,255,255,.35); text-align:center; animation:arrive .7s cubic-bezier(.2,.8,.2,1) both; }
+      .card:before { content:""; position:absolute; inset:12px; border:2px dashed rgba(231,67,140,.22); border-radius:30px; pointer-events:none; }
+      .tape { position:absolute; top:-18px; width:84px; height:34px; background:rgba(255,193,220,.7); border:1px solid rgba(255,255,255,.7); }
+      .tape.a { left:60px; transform:rotate(-7deg); }.tape.b { right:60px; transform:rotate(7deg); }
+      .eyebrow { margin:0 0 23px; color:var(--pink); font-size:12px; font-weight:900; letter-spacing:.2em; }
+      .bunny { position:relative; width:118px; height:105px; margin-bottom:24px; animation:bob 2.8s ease-in-out infinite; }
+      .face { position:absolute; z-index:2; inset:13px 6px 0; border:3px solid #f76aa8; border-radius:50% 50% 45% 45%; background:#fff9fc; box-shadow:inset 0 -10px #ffe7f2,0 10px 20px rgba(203,56,121,.13); }
+      .ear { position:absolute; z-index:1; top:2px; width:43px; height:55px; border:3px solid #f76aa8; background:#fff9fc; }.ear:after { content:""; position:absolute; inset:9px 9px 15px; border-radius:inherit; background:#ffc7df; }.left{left:9px;border-radius:75% 35% 55% 40%;transform:rotate(-22deg)}.right{right:9px;border-radius:35% 75% 40% 55%;transform:rotate(22deg)}
+      .face i { position:absolute; top:34px; color:var(--deep); font-style:normal; font-size:22px; }.eye1{left:27px}.eye2{right:27px}.mouth{top:48px!important;left:50%;transform:translateX(-50%);font-size:17px!important;font-weight:bold}.blush{position:absolute;top:57px;width:19px;height:8px;border-radius:50%;background:rgba(255,125,178,.47)}.bl1{left:13px}.bl2{right:13px}
+      h1 { position:relative; margin:0; font-family:Georgia,"Times New Roman",serif; font-size:clamp(37px,8vw,56px); line-height:.98; letter-spacing:-.045em; }.pink { color:var(--pink); font-style:italic; }
+      .subtitle { margin:18px 0 28px; color:#b05b83; font-size:15px; }
+      .buttons { position:relative; z-index:5; display:flex; gap:12px; min-height:58px; }.button { min-width:124px; min-height:56px; border-radius:999px; font-size:17px; font-weight:900; cursor:pointer; touch-action:manipulation; }.yes { border:2px solid #ff9fc8; background:#fffafd; color:var(--pink); box-shadow:0 7px #ffc0dd; }.yes.escape { position:fixed; z-index:20; transition:left .18s cubic-bezier(.22,.8,.35,1),top .18s cubic-bezier(.22,.8,.35,1); }.no { border:2px solid var(--pink); background:linear-gradient(#f76aa8,#e7438c); color:white; box-shadow:0 7px #bc276c,0 12px 24px rgba(206,47,117,.2); }.no:hover { transform:translateY(-3px) scale(1.03); }.hint { min-height:20px; margin:22px 0 -8px; color:#f76aa8; font-size:13px; font-weight:bold; opacity:0; transition:.2s; }.hint.show{opacity:1}.spark{position:absolute;color:#ff9fc8;font-size:34px}.s1{left:31px;top:120px}.s2{right:31px;bottom:94px}.footer{position:fixed;bottom:19px;margin:0;color:rgba(113,36,78,.55);font-size:12px;font-weight:bold;letter-spacing:.08em}
+      .broken { margin-bottom:24px;font-size:84px;filter:drop-shadow(0 10px 14px rgba(169,40,104,.16)); }.goodbye .subtitle{margin-bottom:15px}.stars{color:#f76aa8;font-size:20px;letter-spacing:.15em}
+      @keyframes float{from{transform:translateY(0) rotate(0);opacity:0}12%,88%{opacity:1}to{transform:translateY(-115vh) rotate(80deg);opacity:0}} @keyframes arrive{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}} @keyframes bob{50%{transform:translateY(-7px) rotate(1deg)}}
+      @media(max-width:420px){.card{min-height:540px;padding:48px 17px 37px}.buttons{gap:8px}.button{min-width:112px}.s1{left:22px}.s2{right:22px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="hearts" aria-hidden="true"><span style="left:7%;--d:8s;--delay:0s">♡</span><span style="left:19%;--d:10s;--delay:2s">♡</span><span style="left:33%;--d:9s;--delay:4s">♡</span><span style="left:68%;--d:9s;--delay:5s">♡</span><span style="left:82%;--d:11s;--delay:1s">♡</span></div>
+      <section class="card" id="question">
+        <div class="tape a"></div><div class="tape b"></div>
+        <p class="eyebrow">♡　ONE LITTLE QUESTION　♡</p>
+        <div class="bunny" aria-hidden="true"><div class="ear left"></div><div class="ear right"></div><div class="face"><i class="eye1">•</i><i class="eye2">•</i><span class="blush bl1"></span><span class="blush bl2"></span><i class="mouth">ᴗ</i></div></div>
+        <h1>Do you want to<br><span class="pink">get back together?</span></h1>
+        <p class="subtitle">Choose carefully, cutie…</p>
+        <div class="buttons"><button class="button yes" id="yes">Yes ♡</button><button class="button no" id="no">No ♡</button></div>
+        <p class="hint" id="hint">nope, not that one hehe ♡</p><span class="spark s1">✦</span><span class="spark s2">♡</span>
+      </section>
+      <section class="card goodbye" id="goodbye" hidden><div class="broken">💔</div><p class="eyebrow">♡　MESSAGE RECEIVED　♡</p><h1>Well… I guess<br><span class="pink">we broke up.</span></h1><p class="subtitle">Thanks for being honest, I suppose.</p><div class="stars">✦　♡　✦</div></section>
+      <p class="footer">made with way too much pink ♡</p>
+    </main>
+    <script>
+      const yes=document.querySelector('#yes'), no=document.querySelector('#no'), hint=document.querySelector('#hint');
+      function escapeYes(){const w=132,h=58,m=20;yes.classList.add('escape');yes.style.left=Math.max(m,Math.random()*(innerWidth-w-m*2)+m)+'px';yes.style.top=Math.max(m,Math.random()*(innerHeight-h-m*2)+m)+'px';hint.classList.add('show')}
+      yes.addEventListener('pointerenter',escapeYes); yes.addEventListener('pointerdown',e=>{e.preventDefault();escapeYes()}); yes.addEventListener('focus',escapeYes);
+      no.addEventListener('click',()=>{document.querySelector('#question').hidden=true;document.querySelector('#goodbye').hidden=false});
+    </script>
+  </body>
+</html>
